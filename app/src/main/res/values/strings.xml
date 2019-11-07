@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">SaveNotes</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="Category">
+        <item>Personal</item>
+        <item>Education</item>
+        <item>Business</item>
+        <item>TODO</item>
+        <item>Agenda</item>
+    </string-array>
 </resources>
