@@ -9,4 +9,6 @@
         <item>TODO</item>
         <item>Agenda</item>
     </string-array>
+    <string name="title_activity_note_list">Notes</string>
+    <string name="title_activity_note">Edit Note</string>
 </resources>

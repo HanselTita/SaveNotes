@@ -1,5 +1,6 @@
 package com.softhans.savenotes;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,11 +13,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 public class NoteActivity extends AppCompatActivity {
+
+    public static final String NOTE_INFO = "com.softhans.savenotes.NOTE_INFO";
+
+private EditText mTitle, mText;
+    private NoteInfo note;
+    private NoteInfo mNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +33,11 @@ public class NoteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mTitle = findViewById(R.id.text_note_title);
+        mText = findViewById(R.id.text_note_text);
+
         Spinner spinnerCourse = findViewById(R.id.spinner_course);
+
 
 //populating SPinner
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
@@ -34,7 +46,27 @@ public class NoteActivity extends AppCompatActivity {
         //code to get and display spinner as drop down  list
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourse.setAdapter(mAdapter);
+
+
+        readDisplayedValues();
+
+        displayNote(mTitle, mText);
     }
+
+    private void displayNote(EditText title, EditText text)
+    {
+        mTitle.setText(mNote.getTitle());
+        mText.setText(mNote.getNote());
+
+    }
+
+    private void readDisplayedValues()
+    {
+        Intent intent = getIntent();
+        mNote = intent.getParcelableExtra(NOTE_INFO);
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,12 +75,14 @@ public class NoteActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
