@@ -25,6 +25,7 @@ public class NoteActivity extends AppCompatActivity {
 private EditText mTitle, mText;
     private NoteInfo note;
     private NoteInfo mNote;
+    private boolean mIsNewNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ private EditText mTitle, mText;
 
 
         readDisplayedValues();
-
+            if(!mIsNewNote) // so as to be able to creat new notes.
         displayNote(mTitle, mText);
     }
 
@@ -64,6 +65,8 @@ private EditText mTitle, mText;
     {
         Intent intent = getIntent();
         mNote = intent.getParcelableExtra(NOTE_INFO);
+
+        mIsNewNote = mNote == null;
 
     }
 
