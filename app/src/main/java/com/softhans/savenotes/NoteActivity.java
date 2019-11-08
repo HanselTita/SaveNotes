@@ -3,27 +3,18 @@ package com.softhans.savenotes;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
-
-import java.util.ArrayList;
 
 public class NoteActivity extends AppCompatActivity {
 
     public static final String NOTE_INFO = "com.softhans.savenotes.NOTE_INFO";
 
-private EditText mTitle, mText;
-    private NoteInfo note;
+    private EditText mTitle, mText;
     private NoteInfo mNote;
     private boolean mIsNewNote;
 
@@ -37,16 +28,16 @@ private EditText mTitle, mText;
         mTitle = findViewById(R.id.text_note_title);
         mText = findViewById(R.id.text_note_text);
 
-        Spinner spinnerCourse = findViewById(R.id.spinner_course);
+ //        Spinner spinnerCourse = findViewById(R.id.spinner_course);
 
 
-//populating SPinner
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.Category));
-
-        //code to get and display spinner as drop down  list
-        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCourse.setAdapter(mAdapter);
+////populating SPinner
+//        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+//                getResources().getStringArray(R.array.Category));
+//
+//        //code to get and display spinner as drop down  list
+//        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerCourse.setAdapter(mAdapter);
 
 
         readDisplayedValues();
@@ -88,10 +79,25 @@ private EditText mTitle, mText;
 
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_send_email) {
+
+            sendEmail();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendEmail()
+    {
+        String subject = mTitle.getText().toString();
+        String text = mText.getText().toString();
+
+        //Intent to send the email
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc2822"); // message/rfc2822 is a standard internet mime type for sending emails.
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        startActivity(intent);
     }
 }
