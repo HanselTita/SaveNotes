@@ -1,6 +1,7 @@
 package com.softhans.savenotes;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import android.widget.Spinner;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
-    public static final String NOTE_POSITION = "com.jwhh.notekeeper.NOTE_POSITION";
+    public static final String NOTE_POSITION = "com.softhans.savenotes.NOTE_POSITION";
     public static final int POSITION_NOT_SET = -1;
     private NoteInfo mNote;
     private boolean mIsNewNote;
@@ -50,8 +51,12 @@ public class NoteActivity extends AppCompatActivity {
         List<CourseInfo> courses = DataManager.getInstance().getCourses();
         ArrayAdapter<CourseInfo> adapterCourses =
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, courses);
-        adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterCourses.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinnerCourses.setAdapter(adapterCourses);
+
+
+
+
 
         readDisplayStateValues();
         saveOriginalNoteValues();
@@ -160,7 +165,7 @@ public class NoteActivity extends AppCompatActivity {
     private void sendEmail() {
         CourseInfo course = (CourseInfo) mSpinnerCourses.getSelectedItem();
         String subject = mTextNoteTitle.getText().toString();
-        String text = "Checkout what I learned in the Pluralsight course \"" +
+        String text = "Check Out this notes of mine \"" +
                 course.getTitle() + "\"\n" + mTextNoteText.getText();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc2822");

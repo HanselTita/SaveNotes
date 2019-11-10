@@ -118,6 +118,7 @@ public class DataManager {
         List<ModuleInfo> modules = new ArrayList<>();
 
         return new CourseInfo("Personal", "Personal", modules);
+
     }
 
     private CourseInfo initializeCourse2() {
