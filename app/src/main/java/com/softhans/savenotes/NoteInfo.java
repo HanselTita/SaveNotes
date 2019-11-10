@@ -3,45 +3,69 @@ package com.softhans.savenotes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+public final class NoteInfo implements Parcelable {
+    private CourseInfo mCourse;
+    private String mTitle;
+    private String mText;
 
-final public class NoteInfo implements Parcelable {
-    private String title;
-    private String note;
-
-    public NoteInfo (String title, String note) {
-        this.title = title;
-        this.note = note;
+    public NoteInfo(CourseInfo course, String title, String text) {
+        mCourse = course;
+        mTitle = title;
+        mText = text;
     }
 
-    private  NoteInfo(Parcel parcel)
-    {
-        title = parcel.readString();
-        note = parcel.readString();
+    private NoteInfo(Parcel parcel) {
+        mCourse = parcel.readParcelable(CourseInfo.class.getClassLoader());
+        mTitle = parcel.readString();
+        mText = parcel.readString();
+    }
+
+    public CourseInfo getCourse() {
+        return mCourse;
+    }
+
+    public void setCourse(CourseInfo course) {
+        mCourse = course;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        mTitle = title;
     }
 
-    public String getNote() {
-        return note;
+    public String getText() {
+        return mText;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setText(String text) {
+        mText = text;
     }
 
-    public static ArrayList<NoteInfo> getNoteInfo() {
-        ArrayList<NoteInfo> noteInfo = new ArrayList<NoteInfo>();
-        noteInfo.add(new NoteInfo("Harry", "San Diego"));
-        noteInfo.add(new NoteInfo("Marla", "San Francisco"));
-        noteInfo.add(new NoteInfo("Sarah", "San Marco"));
-        return noteInfo;
+    private String getCompareKey() {
+        return mCourse.getCourseId() + "|" + mTitle + "|" + mText;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NoteInfo that = (NoteInfo) o;
+
+        return getCompareKey().equals(that.getCompareKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return getCompareKey().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getCompareKey();
     }
 
     @Override
@@ -51,21 +75,33 @@ final public class NoteInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(title);
-        parcel.writeString(note);
-
+        parcel.writeParcelable(mCourse, 0);
+        parcel.writeString(mTitle);
+        parcel.writeString(mText);
     }
 
-    public static final Parcelable.Creator<NoteInfo> CREATOR = new Parcelable.Creator<NoteInfo>() {
-        @Override
-        public NoteInfo createFromParcel(Parcel parcel) {
-            return new NoteInfo(parcel);
-        }
+    public static final Parcelable.Creator<NoteInfo> CREATOR =
+            new Parcelable.Creator<NoteInfo>() {
+                @Override
+                public NoteInfo createFromParcel(Parcel parcel) {
+                    return new NoteInfo(parcel);
+                }
 
-        @Override
-        public NoteInfo[] newArray(int size)
-        {
-            return new NoteInfo[size];
-        }
-    };
+                @Override
+                public NoteInfo[] newArray(int size) {
+                    return new NoteInfo[size];
+                }
+            };
 }
+
+
+
+
+
+
+
+
+
+
+
+

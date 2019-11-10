@@ -2,13 +2,7 @@
     <string name="app_name">SaveNotes</string>
     <string name="action_send_email">Send as Email</string>
 
-    <string-array name="Category">
-        <item>Personal</item>
-        <item>Education</item>
-        <item>Business</item>
-        <item>TODO</item>
-        <item>Agenda</item>
-    </string-array>
     <string name="title_activity_note_list">Notes</string>
     <string name="title_activity_note">Edit Note</string>
+    <string name="cancel">Cancel</string>
 </resources>
