@@ -138,7 +138,7 @@ public class DataManager {
         List<ModuleInfo> modules = new ArrayList<>();
 
 
-        return new CourseInfo("Assignments", "assignment", modules);
+        return new CourseInfo("Assignments", "Assignment", modules);
     }
     //endregion
 
