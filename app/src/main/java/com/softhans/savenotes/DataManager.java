@@ -89,6 +89,8 @@ public class DataManager {
         mCourses.add(initializeCourse2());
         mCourses.add(initializeCourse3());
         mCourses.add(initializeCourse4());
+        mCourses.add(initializeCourse5());
+        mCourses.add(initializeCourse6());
     }
 
     public void initializeExampleNotes() {
@@ -109,6 +111,14 @@ public class DataManager {
 
 
         course = dm.getCourse("Assignments");
+        mNotes.add(new NoteInfo(course, "",
+                ""));
+
+        course = dm.getCourse("Achievements");
+        mNotes.add(new NoteInfo(course, "",
+                ""));
+
+        course = dm.getCourse("Miscellaneous");
         mNotes.add(new NoteInfo(course, "",
                 ""));
 
@@ -139,6 +149,20 @@ public class DataManager {
 
 
         return new CourseInfo("Assignments", "Assignment", modules);
+    }
+
+    private CourseInfo initializeCourse5() {
+        List<ModuleInfo> modules = new ArrayList<>();
+
+
+        return new CourseInfo("Achievements", "Achievements", modules);
+    }
+
+    private CourseInfo initializeCourse6() {
+        List<ModuleInfo> modules = new ArrayList<>();
+
+
+        return new CourseInfo("Miscellaneous", "Miscellaneous", modules);
     }
     //endregion
 

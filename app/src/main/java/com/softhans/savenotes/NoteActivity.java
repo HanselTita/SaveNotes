@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -165,6 +168,19 @@ public class NoteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    //code from preventing the next button from crashing when reaching the last note.
+    @Override
+    public boolean onPrepareOptionsMenu( Menu menu)
+    {
+        MenuItem item = menu.findItem(R.id.action_next);
+
+        int lastNoteIndex = DataManager.getInstance().getNotes().size() -1;
+        item.setEnabled(mNotePosition < lastNoteIndex);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void moveNext()
     {
         saveNote();
@@ -174,6 +190,8 @@ public class NoteActivity extends AppCompatActivity {
 
         saveOriginalNoteValues();
         displayNote(mSpinnerCourses, mTextNoteTitle, mTextNoteText);
+        invalidateOptionsMenu();
+
     }
 
     private void sendEmail() {
