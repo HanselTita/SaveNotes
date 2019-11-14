@@ -19,8 +19,9 @@ import android.widget.ListView;
 import java.util.List;
 
 public class NoteListActivity extends AppCompatActivity {
+    private NoteRecyclerAdapter mNoteRecyclerAdapter;
 
-  //  private ArrayAdapter<NoteInfo> mAdapterNotes;
+    //  private ArrayAdapter<NoteInfo> mAdapterNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class NoteListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
       //  mAdapterNotes.notifyDataSetChanged();
+        mNoteRecyclerAdapter.notifyDataSetChanged();
     }
 
     private void initializeDisplayContent() {
@@ -73,6 +75,10 @@ public class NoteListActivity extends AppCompatActivity {
 
         //Combine them
         recyclerNotes.setLayoutManager(notesLayoutManager);
+
+        List<NoteInfo> notes = DataManager.getInstance().getNotes();
+        mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
+        recyclerNotes.setAdapter(mNoteRecyclerAdapter);
     }
 
 }
