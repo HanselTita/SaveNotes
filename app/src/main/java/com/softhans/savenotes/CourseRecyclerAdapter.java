@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 
 public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAdapter.ViewHolder>{
@@ -62,9 +64,7 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAd
                 @Override
                 public void onClick(View view)
                 {
-                    Intent intent =new Intent(mContext, NoteActivity.class);
-                    intent.putExtra(NoteActivity.NOTE_POSITION, mCurrentPosition);
-                    mContext.startActivity(intent);
+                    Snackbar.make(view, mCourses.get(mCurrentPosition).getTitle(), Snackbar.LENGTH_LONG).show();
                 }
             });
 
