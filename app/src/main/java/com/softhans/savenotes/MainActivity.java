@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeDisplayContent() {
-        mRecyclerItems = (RecyclerView) findViewById(R.id.list_items);
+        mRecyclerItems = findViewById(R.id.list_items);
         mNotesLayoutManager = new LinearLayoutManager(this);
         mCoursesLayoutManager = new GridLayoutManager(this, 2);
 
