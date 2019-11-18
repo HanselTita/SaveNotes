@@ -21,7 +21,7 @@
 
 <style name="CourseTilte" parent="TextAppearance.AppCompat.Large">
 
-    <item name="android:textColor">@color/colorPrimaryDark</item>
+    <item name="android:textColor">@color/colorAccent</item>
     <item name="android:textStyle">bold</item>
 
 </style>

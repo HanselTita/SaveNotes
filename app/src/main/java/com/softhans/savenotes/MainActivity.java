@@ -1,16 +1,19 @@
 package com.softhans.savenotes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,6 +63,23 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         mNoteRecyclerAdapter.notifyDataSetChanged();
+        updateNavHeader();
+    }
+
+    private void updateNavHeader()
+    {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView txtUserName = findViewById(R.id.text_user_name);
+        TextView txtUserEmail = findViewById(R.id.text_email_address);
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String userName = pref.getString("user_display_name", "");
+        String userEmail = pref.getString("user_email_address", "");
+
+        txtUserName.setText(userName);
+        txtUserEmail.setText(userEmail);
     }
 
     private void initializeDisplayContent() {
@@ -121,6 +141,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
@@ -137,10 +158,10 @@ public class MainActivity extends AppCompatActivity
             displayNotes();
         } else if (id == R.id.nav_courses) {
             displayCourses();
-        } else if (id == R.id.nav_share) {
-            handleSelection("Don't you think you've shared enough");
-        } else if (id == R.id.nav_send) {
-            handleSelection("Send");
+        }  else if (id == R.id.nav_share) {
+            handleSelection("Share");
+        }else if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
