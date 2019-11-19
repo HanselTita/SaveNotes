@@ -78,7 +78,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.header_preferences, rootKey);
+          setPreferencesFromResource(R.xml.header_preferences, rootKey);
         }
     }
 
@@ -101,7 +101,7 @@ public class SettingsActivity extends AppCompatActivity implements
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.notification_preferences, rootKey);
+            setPreferencesFromResource(R.xml.sync_preferences, rootKey);
         }
     }
 }

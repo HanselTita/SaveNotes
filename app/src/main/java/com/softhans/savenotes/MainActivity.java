@@ -3,6 +3,7 @@ package com.softhans.savenotes;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity
     {
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView txtUserName = findViewById(R.id.text_user_name);
-        TextView txtUserEmail = findViewById(R.id.text_email_address);
+        TextView txtUserName = headerView.findViewById(R.id.text_user_name);
+        TextView txtUserEmail = headerView.findViewById(R.id.text_email_address);
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void selectNavigationMenuItem(int id) {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (findViewById(R.id.nav_view));
         Menu menu = navigationView.getMenu();
         menu.findItem(id).setChecked(true);
     }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_courses) {
             displayCourses();
         }  else if (id == R.id.nav_share) {
-            handleSelection("Share");
+            handleShare();
         }else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         }
@@ -167,6 +167,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void handleShare()
+    {
+        View view = findViewById(R.id.list_items);
+        Snackbar.make(view, "Share to -" + PreferenceManager.getDefaultSharedPreferences(this).getString("user_favorite_social", ""), Snackbar.LENGTH_LONG).show();
     }
 
     private void handleSelection(String message) {
