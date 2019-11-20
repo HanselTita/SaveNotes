@@ -97,11 +97,5 @@ public class SettingsActivity extends AppCompatActivity implements
             setPreferencesFromResource(R.xml.sync_preferences, rootKey);
         }
     }
-    public static class NotificationFragment extends PreferenceFragmentCompat {
 
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.sync_preferences, rootKey);
-        }
-    }
 }

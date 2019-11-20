@@ -7,10 +7,7 @@
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general"/>
 
-    <Preference
-        android:fragment="com.softhans.savenotes.SettingsActivity$NotificationFragment"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/pref_header_notifications"/>
+
 
     <Preference
         android:fragment="com.softhans.savenotes.SettingsActivity$SyncFragment"

@@ -9,10 +9,11 @@
         android:title="@string/next"
         app:showAsAction="ifRoom|withText" />
     <item
-        android:id="@+id/action_send_mail"
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_black_24dp"
         android:orderInCategory="101"
-        android:title="@string/action_send_email"
-        app:showAsAction="never" />
+        android:title="@string/action_share"
+        app:showAsAction="never|ifRoom|withText" />
     <item
         android:id="@+id/action_cancel"
         android:icon="@android:drawable/ic_menu_revert"
